@@ -1,0 +1,67 @@
+{
+	"lives": 4,
+	"timeout": 4,
+	"cards":
+	[
+		{
+			"name": "Абрикос",
+			"address": "Assets/Art/Streaming/Eatable/Apricot.png",
+			"eatable": true
+		},
+		{
+			"name": "Торт",
+			"address": "Assets/Art/Streaming/Eatable/Cake.png",
+			"eatable": true
+		},
+		{
+			"name": "Виноград",
+			"address": "Assets/Art/Streaming/Eatable/Grape.png",
+			"eatable": true
+		},
+		{
+			"name": "Дыня",
+			"address": "Assets/Art/Streaming/Eatable/Melon.png",
+			"eatable": true
+		},
+		{
+			"name": "Малина",
+			"address": "Assets/Art/Streaming/Eatable/Raspberries.png",
+			"eatable": true
+		},
+		{
+			"name": "Помидор",
+			"address": "Assets/Art/Streaming/Eatable/Tomato.png",
+			"eatable": true
+		},
+		{
+			"name": "Ранец",
+			"address": "Assets/Art/Streaming/Uneatable/Backpack.png",
+			"eatable": false
+		},
+		{
+			"name": "Мяч",
+			"address": "Assets/Art/Streaming/Uneatable/Ball.png",
+			"eatable": false
+		},
+		{
+			"name": "Фонарь",
+			"address": "Assets/Art/Streaming/Uneatable/Flashlight.png",
+			"eatable": false
+		},
+		{
+			"name": "Маяк",
+			"address": "Assets/Art/Streaming/Uneatable/Lighthouse.png",
+			"eatable": false
+		},
+		{
+			"name": "Ролики",
+			"address": "Assets/Art/Streaming/Uneatable/Rollers.png",
+			"eatable": false
+		},
+		{
+			"name": "Телефон",
+			"address": "Assets/Art/Streaming/Uneatable/Telephone.png",
+			"eatable": false
+		}
+	]
+}
