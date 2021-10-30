@@ -6,6 +6,7 @@ public static class ArrayExt
 {
     public static void Shuffle(this System.Array arr)
     {
+        // перемешиваем массив
         if(arr.Length < 2)
         {
             return;

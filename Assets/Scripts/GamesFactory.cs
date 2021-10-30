@@ -6,39 +6,35 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class GamesFactory : MonoBehaviour
 {
-    public enum GameNames
-    {
-        Eatable
-    }
-
     public void OnEnable()
     {
+        // Подписываемся
         EventBus.onReceiveEvent += OnReceiveEvent;
     }
 
     public void OnDisable()
     {
+        // Отписываемя
         EventBus.onReceiveEvent -= OnReceiveEvent;
     }
 
-    public void CreateGame(Transform parent, GameNames gn)
+    public void CreateGame(Transform parent, string gameassetaddress)
     {
-        switch(gn)
-        {
-            case GameNames.Eatable:
-                Addressables.LoadAssetAsync<GameObject>("Assets/Prefabs/EatableGame.prefab").Completed += (aoh)=> { OnGamePrefabLoadDone(parent, aoh); };
-                break;
-        }
+        // Тут тоже используем аддресуемые чтобы было универсальнее
+        Addressables.LoadAssetAsync<GameObject>(gameassetaddress).Completed += (aoh)=> { OnGamePrefabLoadDone(parent, aoh); };
     }
 
     private void OnGamePrefabLoadDone(Transform parent, AsyncOperationHandle<GameObject> aoh)
     {
+        // Загрузили префаб игры
         if (aoh.Status == AsyncOperationStatus.Succeeded)
         {
             GameObject newgo = GameObject.Instantiate(aoh.Result, Vector3.zero, Quaternion.identity, parent);
             RectTransform rt = newgo.GetComponent<RectTransform>();
             rt.offsetMax = Vector2.zero;
             rt.offsetMin = Vector2.zero;
+
+            EventBus.SendEvent(EventBus.EventID.InitGame);
         }
 
         Addressables.Release(aoh);
@@ -46,9 +42,10 @@ public class GamesFactory : MonoBehaviour
 
     private void OnReceiveEvent(EventBus.EventID id, object[] args)
     {
+        // Обработка событий
         if(id == EventBus.EventID.CreateGame)
         {
-            CreateGame((Transform)args[0], (GameNames)args[1]);
+            CreateGame((Transform)args[0], (string)args[1]);
         }
     }
 }

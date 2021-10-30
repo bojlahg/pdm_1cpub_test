@@ -9,11 +9,13 @@ public class CardDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        // Запомним где начали тянуть
         m_StartDragPosition = eventData.position;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        // Проверяем сколько протянули карту - в дюймах :-)
         float delta = (eventData.position.x - m_StartDragPosition.x) / Screen.dpi;
         if (delta <= -0.125f)
         {

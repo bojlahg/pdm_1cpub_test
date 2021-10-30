@@ -8,6 +8,7 @@ public class App : MonoBehaviourSingleton<App>
 
     private void Start()
     {
-        EventBus.SendEvent(EventBus.EventID.CreateGame, m_GameContainer, GamesFactory.GameNames.Eatable);
+        // Стартуем игру
+        EventBus.SendEvent(EventBus.EventID.CreateGame, m_GameContainer, "Assets/Prefabs/EatableGame.prefab");
     }
 }

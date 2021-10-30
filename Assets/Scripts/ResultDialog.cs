@@ -10,29 +10,43 @@ public class ResultDialog : MonoBehaviour
 
     private void OnEnable()
     {
-        EventBus.onReceiveEvent += OnReceiveEvent;
+        // Подписываемся
+        EventBus.onReceiveEvent += OnEventReceived;
     }
 
     private void OnDisable()
     {
-        EventBus.onReceiveEvent -= OnReceiveEvent;
+        // Отписываемя
+        EventBus.onReceiveEvent -= OnEventReceived;
     }
 
-    private void OnReceiveEvent(EventBus.EventID id, object[] args)
+    private void OnEventReceived(EventBus.EventID id, object[] args)
     {
-        if (id == EventBus.EventID.InitUI)
+        // Обработка событий
+        switch (id)
         {
-            InitUI((EatableGame.EatableConfig)args[0]);
+            case EventBus.EventID.InitUI: InitUI((EatableGame.EatableConfig)args[0]); break;
+            case EventBus.EventID.GameFinished: GameFinished((int)args[0]); break;
         }
     }
 
     private void InitUI(EatableGame.EatableConfig cfg)
     {
+        // Инициализация
         m_Group.SetActive(false);
+    }
+
+    private void GameFinished(int score)
+    {
+        // Игра закончена ставим счет и показываем окно
+        m_ScoreText.text = string.Format("Счет: {0}", score);
+        m_Group.SetActive(true);
     }
 
     public void RetryButtonClick()
     {
-        EventBus.SendEvent(EventBus.EventID.Result_RetryButtonClick);
+        // Нажали кнопку перезапуска игры
+        m_Group.SetActive(false);
+        EventBus.SendEvent(EventBus.EventID.RestartGame);
     }
 }

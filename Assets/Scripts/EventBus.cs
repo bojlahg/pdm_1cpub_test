@@ -4,10 +4,11 @@ using UnityEngine;
 
 public static class EventBus
 {
+    // Доступные события
     public enum EventID
     {
         CreateGame,
-
+        InitGame,
         InitUI,
         ShowCard,
         CardAppeared,
@@ -16,16 +17,27 @@ public static class EventBus
         DropCard,
         GameFinished,
         CardMoved,
-        Result_RetryButtonClick,
+        LiveCountChanged,
+        StarCountChanged,
+        TimerChanged,
+        RestartGame,
     }
 
     public delegate void OnReceiveEvent(EventBus.EventID id, object[] args);
     public static OnReceiveEvent onReceiveEvent;
 
-
     public static void SendEvent(EventBus.EventID id, params object[] args)
     {
-        if(onReceiveEvent != null)
+        // Послать событие
+        /*
+        string log = string.Format("Event: {0}", id);
+        foreach (object arg in args)
+        {
+            log += string.Format(", {0}", arg.ToString());
+        }
+        Debug.Log(log);
+        */
+        if (onReceiveEvent != null)
         {
             onReceiveEvent.Invoke(id, args);
         }
